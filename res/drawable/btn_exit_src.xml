@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <selector xmlns:android="http://schemas.android.com/apk/res/android" android:layout_weight="1" android:layout_width="0dp" android:layout_height="0dp">
+     <item android:state_pressed="true"
+           android:drawable="@drawable/btn_exit_press" /> <!-- pressed -->
+     <item android:state_focused="true"
+           android:drawable="@drawable/btn_exit_press" /> <!-- focused -->
+     <item android:drawable="@drawable/btn_exit" /> <!-- default -->
+ </selector>

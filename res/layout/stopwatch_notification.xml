@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp" >
+
+    <LinearLayout
+        android:layout_width="140dp"
+        android:layout_height="64dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btn_notification_changestate"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_start_src" />
+
+        <ImageButton
+            android:id="@+id/btn_notfication_reset"
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_reset_src" />
+
+        <ImageButton
+            android:id="@+id/btn_notification_exit"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_exit_src" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_notification_icon"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="0dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_notification_time"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/btn_notification_icon"
+        android:gravity="center_vertical"
+        android:paddingLeft="6dp"
+        android:singleLine="true"
+        android:text="@string/small_empty_time"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="42sp" />
+
+</RelativeLayout>
