@@ -59,8 +59,8 @@ public class TimeService extends Service implements PropertyChangeListener {
 	private BroadcastReceiver recieverReset;
 	private BroadcastReceiver recieverExit;
 	private Timer t;
-	private Bitmap btnPause;
-	private Bitmap btnStart;
+//	private Bitmap btnPause;
+//	private Bitmap btnStart;
 	private Builder mBuilder;
 	
 	@Override
@@ -107,8 +107,8 @@ public class TimeService extends Service implements PropertyChangeListener {
 	
 	@Override
 	public void onCreate() {
-		btnPause = BitmapFactory.decodeResource(getResources(), R.drawable.btn_pause);
-		btnStart = BitmapFactory.decodeResource(getResources(), R.drawable.btn_start);
+//		btnPause = BitmapFactory.decodeResource(getResources(), R.drawable.btn_pause);
+//		btnStart = BitmapFactory.decodeResource(getResources(), R.drawable.btn_start);
     	mBuilder = new NotificationCompat.Builder(this)
     	        .setSmallIcon(R.drawable.ic_launcher)
     	        .setOnlyAlertOnce(true);

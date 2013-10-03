@@ -142,6 +142,7 @@ public class StopwatchActivity extends Activity implements PropertyChangeListene
 				sb.append(':');
 			} 
 			if(minutes > 0) {
+				minutes = minutes % 60;
 				if(minutes >= 10) {
 					sb.append(minutes);
 				} else {

@@ -19,7 +19,7 @@
         android:gravity="center"
         android:text="@string/empty_time"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="60sp" />
+        android:textSize="64sp" />
 
 	<LinearLayout
 	    android:layout_width="wrap_content"
