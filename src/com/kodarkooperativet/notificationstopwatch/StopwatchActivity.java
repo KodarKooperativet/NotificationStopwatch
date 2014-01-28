@@ -31,7 +31,7 @@ import android.widget.TextView;
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  *    
- * The one and only Activity class.
+ * The one and only Activity class. Uses {@link TimeContainer} for communication.
  * 
  * @author KodarKooperativet
  *
@@ -44,7 +44,7 @@ public class StopwatchActivity extends Activity implements PropertyChangeListene
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.activity_stopwatch);
 		tvTime = (TextView) findViewById(R.id.tvTime);
 		btnStart = (Button) findViewById(R.id.btnStart);
@@ -81,7 +81,6 @@ public class StopwatchActivity extends Activity implements PropertyChangeListene
 	}
 	
 	private void checkServiceRunning() {
-		
 		if(!TimeContainer.getInstance().isServiceRunning.get()) {
 			startService(new Intent(this, TimeService.class));
 		}

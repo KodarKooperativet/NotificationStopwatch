@@ -7,29 +7,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
-
-
-
-
 import android.app.Notification;
 import android.app.Notification.Builder;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
 /**
  * 
- *    Copyright 2013 KodarKooperativet
+ *    Copyright 2014 KodarKooperativet
  * 
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -63,8 +56,6 @@ public class TimeService extends Service implements PropertyChangeListener {
 	private BroadcastReceiver recieverReset;
 	private BroadcastReceiver recieverExit;
 	private Timer t;
-//	private Bitmap btnPause;
-//	private Bitmap btnStart;
 	private Builder mBuilder;
 	
 	@Override
@@ -111,8 +102,6 @@ public class TimeService extends Service implements PropertyChangeListener {
 	
 	@Override
 	public void onCreate() {
-//		btnPause = BitmapFactory.decodeResource(getResources(), R.drawable.btn_pause);
-//		btnStart = BitmapFactory.decodeResource(getResources(), R.drawable.btn_start);
     	mBuilder = new Notification.Builder(this)
     	        .setSmallIcon(R.drawable.ic_launcher)
     	        .setOnlyAlertOnce(true);
@@ -158,9 +147,7 @@ public class TimeService extends Service implements PropertyChangeListener {
     	contentView.setOnClickPendingIntent(R.id.btn_notification_exit, exitPendingIntent);
 
         mBuilder.setContent(contentView);
-    	Intent resultIntent = new Intent(this, StopwatchActivity.class);
-
-
+        
         Intent notificationIntent = new Intent(this, StopwatchActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent = PendingIntent.getActivity(this, PendingIntent.FLAG_UPDATE_CURRENT, notificationIntent, 0);
@@ -191,17 +178,21 @@ public class TimeService extends Service implements PropertyChangeListener {
 		return null;
 	}
 	
+	/**
+	 * Singleton design class used to communicate between {@link Activity} and {@link Service}
+	 * 
+	 * @author KodarKoooperativet
+	 *
+	 */
 	public static class TimeContainer {
-		
-		private static TimeContainer instance;
-
-		public AtomicBoolean isServiceRunning;
-		
-		private PropertyChangeSupport observers;
 		
 		public static final int STATE_STOPPED = 0;
 		public static final int STATE_PAUSED  = 1;
 		public static final int STATE_RUNNING = 2;
+		
+		private static TimeContainer instance;
+		public AtomicBoolean isServiceRunning;
+		private PropertyChangeSupport observers;
 		
 		public static final String STATE_CHANGED = "state_changed";
 		
@@ -209,7 +200,7 @@ public class TimeService extends Service implements PropertyChangeListener {
 		private long startTime;
 		private long elapsedTime;
 		
-		private Object mSynchronizedObject = new Object();
+		private final Object mSynchronizedObject = new Object();
 		
 		private TimeContainer() { 
 			isServiceRunning = new AtomicBoolean(false);
