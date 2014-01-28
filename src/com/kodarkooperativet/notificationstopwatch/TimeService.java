@@ -8,9 +8,16 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
+
+
+
+
+import android.app.Notification;
+import android.app.Notification.Builder;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +25,6 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
-import android.support.v4.app.TaskStackBuilder;
 import android.widget.RemoteViews;
 
 /**
@@ -109,7 +113,7 @@ public class TimeService extends Service implements PropertyChangeListener {
 	public void onCreate() {
 //		btnPause = BitmapFactory.decodeResource(getResources(), R.drawable.btn_pause);
 //		btnStart = BitmapFactory.decodeResource(getResources(), R.drawable.btn_start);
-    	mBuilder = new NotificationCompat.Builder(this)
+    	mBuilder = new Notification.Builder(this)
     	        .setSmallIcon(R.drawable.ic_launcher)
     	        .setOnlyAlertOnce(true);
 		super.onCreate();
@@ -133,9 +137,9 @@ public class TimeService extends Service implements PropertyChangeListener {
 	private synchronized void updateNotification() {
     	RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.stopwatch_notification);
     	if(TimeContainer.getInstance().getCurrentState() == TimeContainer.STATE_RUNNING) {
-			contentView.setImageViewResource(R.id.btn_notification_changestate, R.drawable.btn_pause_src);
+			contentView.setImageViewResource(R.id.btn_notification_changestate, R.drawable.btn_pause);
     	} else {
-			contentView.setImageViewResource(R.id.btn_notification_changestate, R.drawable.btn_start_src);
+			contentView.setImageViewResource(R.id.btn_notification_changestate, R.drawable.btn_start);
     	}
 
     	contentView.setTextViewText(R.id.tv_notification_time, msToMinSec(TimeContainer.getInstance().getElapsedTime()) );
@@ -157,20 +161,15 @@ public class TimeService extends Service implements PropertyChangeListener {
     	Intent resultIntent = new Intent(this, StopwatchActivity.class);
 
 
-    	TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-    	stackBuilder.addParentStack(StopwatchActivity.class);
-    	stackBuilder.addNextIntent(resultIntent);
-    	PendingIntent resultPendingIntent =
-    	        stackBuilder.getPendingIntent(
-    	            0,
-    	            PendingIntent.FLAG_UPDATE_CURRENT
-    	        );
-    	mBuilder.setContentIntent(resultPendingIntent);
+        Intent notificationIntent = new Intent(this, StopwatchActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent intent = PendingIntent.getActivity(this, PendingIntent.FLAG_UPDATE_CURRENT, notificationIntent, 0);
+    	mBuilder.setContentIntent(intent);
     	if(isNotificationShowing) {
-            mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+            mNotificationManager.notify(NOTIFICATION_ID, mBuilder.getNotification());
     	} else {
     		isNotificationShowing = true;
-    		startForeground(NOTIFICATION_ID, mBuilder.build());
+    		startForeground(NOTIFICATION_ID, mBuilder.getNotification());
     	}
 	}
 	
