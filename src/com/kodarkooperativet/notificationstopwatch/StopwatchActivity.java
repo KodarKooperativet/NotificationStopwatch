@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import com.kodarkooperativet.notificationstopwatch.TimeService.TimeContainer;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -41,6 +42,14 @@ public class StopwatchActivity extends Activity implements PropertyChangeListene
 	private TextView tvTime;
 	private Timer t; 
 	private Button btnStart;
+	private Handler h;
+	
+	private final Runnable updateTextRunnable = new Runnable() {
+		@Override
+		public void run() {
+			updateTimeText();
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,7 @@ public class StopwatchActivity extends Activity implements PropertyChangeListene
 		setContentView(R.layout.activity_stopwatch);
 		tvTime = (TextView) findViewById(R.id.tvTime);
 		btnStart = (Button) findViewById(R.id.btnStart);
+		h = new Handler();
 	}
 
 	@Override
@@ -116,12 +126,7 @@ public class StopwatchActivity extends Activity implements PropertyChangeListene
 		t.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						updateTimeText();
-					}
-				});
+				h.post(updateTextRunnable);
 			}
 		}, 0, 16);
 	}
