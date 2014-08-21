@@ -123,6 +123,7 @@ public class TimeService extends Service implements PropertyChangeListener {
 		}, 0, 1000);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private synchronized void updateNotification() {
     	RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.stopwatch_notification);
     	if(TimeContainer.getInstance().getCurrentState() == TimeContainer.STATE_RUNNING) {
@@ -131,7 +132,7 @@ public class TimeService extends Service implements PropertyChangeListener {
 			contentView.setImageViewResource(R.id.btn_notification_changestate, R.drawable.btn_start);
     	}
 
-    	contentView.setTextViewText(R.id.tv_notification_time, msToMinSec(TimeContainer.getInstance().getElapsedTime()) );
+    	contentView.setTextViewText(R.id.tv_notification_time, msToHourMinSec(TimeContainer.getInstance().getElapsedTime()) );
 
     	Intent changeStateIntent = new Intent(ACTION_CHANGESTATE, null);
     	PendingIntent changeStatePendingIntent = PendingIntent.getBroadcast(this, 0, changeStateIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -286,22 +287,43 @@ public class TimeService extends Service implements PropertyChangeListener {
 		
 	}
 	
-	private String msToMinSec(long l){
-		if(l == 0) {
+	private String msToHourMinSec(long ms) {
+		if(ms == 0) {
 			return "00:00";
 		} else {
-			long seconds = (l / 1000) % 60;
-			long minutes = (l / 1000) / 60;
+			long seconds = (ms / 1000) % 60;
+			long minutes = (ms / 1000) / 60;
+			long hours = minutes / 60;
+			
 			StringBuilder sb = new StringBuilder();
-			if(minutes < 10) {
-				sb.append(0);
+			if(hours > 0) {
+				sb.append(hours);
+				sb.append(':');
+			} 
+			if(minutes > 0) {
+				minutes = minutes % 60;
+				if(minutes >= 10) {
+					sb.append(minutes);
+				} else {
+					sb.append(0);
+					sb.append(minutes);
+				}
+			} else {
+				sb.append('0');
+				sb.append('0');
 			}
-			sb.append(minutes);
 			sb.append(':');
-			if(seconds < 10) {
-				sb.append(0);
+			if(seconds > 0) {
+				if(seconds >= 10) {
+					sb.append(seconds);
+				} else {
+					sb.append(0);
+					sb.append(seconds);
+				}
+			} else {
+				sb.append('0');
+				sb.append('0');
 			}
-			sb.append(seconds);
 			return sb.toString();
 		}
 	}
