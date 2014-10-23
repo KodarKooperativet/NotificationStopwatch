@@ -26,7 +26,7 @@
         android:paddingLeft="6dp"
         android:singleLine="true"
         android:text="@string/small_empty_time"
-        android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent.Title"
+        android:textAppearance="@android:style/TextAppearance.Material.Notification.Title"
         android:textSize="42sp" />
 
     <ImageView
