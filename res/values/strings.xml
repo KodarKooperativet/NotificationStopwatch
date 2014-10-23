@@ -3,6 +3,7 @@
 
     <string name="app_name">Stopwatch</string>
     <string name="action_settings">Settings</string>
+    <string name="shortcut_label">Toggle Stopwatch</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="reset">Reset</string>

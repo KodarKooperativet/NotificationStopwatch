@@ -77,11 +77,12 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
-        public static final int empty_time=0x7f060005;
-        public static final int reset=0x7f060004;
-        public static final int small_empty_time=0x7f060006;
-        public static final int start=0x7f060002;
-        public static final int stop=0x7f060003;
+        public static final int empty_time=0x7f060006;
+        public static final int reset=0x7f060005;
+        public static final int shortcut_label=0x7f060002;
+        public static final int small_empty_time=0x7f060007;
+        public static final int start=0x7f060003;
+        public static final int stop=0x7f060004;
     }
     public static final class style {
         /** 
@@ -110,8 +111,11 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
-        public static final int ButtonAppTheme=0x7f070003;
-        public static final int EditTextAppTheme=0x7f070002;
-        public static final int ImageButtonAppTheme=0x7f070004;
+        public static final int ButtonAppTheme=0x7f070004;
+        public static final int EditTextAppTheme=0x7f070003;
+        public static final int ImageButtonAppTheme=0x7f070005;
+        /**  The Invisible theme 
+         */
+        public static final int Theme_CompleteTransparent=0x7f070002;
     }
 }
