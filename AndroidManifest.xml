@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="22" />
 
     <application
         android:allowBackup="true"
@@ -27,11 +27,13 @@
             android:name="com.kodarkooperativet.notificationstopwatch.ServiceStartActivity"
             android:theme="@style/Theme.CompleteTransparent"
             android:exported="true"
-            android:launchMode="singleTop" >
+            android:excludeFromRecents="true"
+            android:documentLaunchMode="always" >
         </activity>
         <activity
             android:name="com.kodarkooperativet.notificationstopwatch.CreateShortcutActivity"
             android:label="@string/shortcut_label"
+            android:excludeFromRecents="true"
             android:theme="@style/Theme.CompleteTransparent" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />

@@ -31,16 +31,16 @@
 	    
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dip"
+        android:layout_height="54dp"
         android:onClick="changeState"
         android:layout_weight="1"
         android:text="@string/start" />
 
     <Button
         android:id="@+id/btnReset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dip"
+        android:layout_height="54dp"
         android:onClick="reset"
         android:layout_weight="1"
         android:text="@string/reset" />

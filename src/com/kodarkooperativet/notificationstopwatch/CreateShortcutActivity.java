@@ -38,6 +38,8 @@ public class CreateShortcutActivity extends Activity {
 		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntent);
 		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.shortcut_label));
 		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		setResult(RESULT_OK, intent);
 		finish();
 	}
