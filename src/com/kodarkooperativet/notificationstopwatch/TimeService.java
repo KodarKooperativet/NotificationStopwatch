@@ -104,6 +104,7 @@ public class TimeService extends Service implements PropertyChangeListener {
 	public void onCreate() {
     	mBuilder = new Notification.Builder(this)
     	        .setSmallIcon(R.drawable.ic_launcher)
+                .setVisibility(VISIBILITY_PUBLIC)
     	        .setOnlyAlertOnce(true);
 		super.onCreate();
 	}
